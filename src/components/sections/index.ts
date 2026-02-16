@@ -1,0 +1,6 @@
+export { Hero } from './Hero'
+export { StorySection } from './StorySection'
+export { IngredientsSection } from './IngredientsSection'
+export { FeaturedMenu } from './FeaturedMenu'
+export { Testimonials } from './Testimonials'
+export { CTASection } from './CTASection'
