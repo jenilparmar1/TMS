@@ -8,13 +8,14 @@ import { Loader2 } from 'lucide-react'
 type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'accent'
 type ButtonSize = 'sm' | 'md' | 'lg' | 'xl'
 
-interface ButtonProps extends Omit<HTMLMotionProps<'button'>, 'ref'> {
+interface ButtonProps extends Omit<HTMLMotionProps<'button'>, 'ref' | 'children'> {
   variant?: ButtonVariant
   size?: ButtonSize
   isLoading?: boolean
   leftIcon?: React.ReactNode
   rightIcon?: React.ReactNode
   fullWidth?: boolean
+  children?: React.ReactNode
 }
 
 const variants: Record<ButtonVariant, string> = {
