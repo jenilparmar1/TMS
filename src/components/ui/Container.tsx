@@ -67,7 +67,7 @@ export const Section = forwardRef<HTMLElement, SectionProps>(
   }, ref) => {
     return (
       <Component
-        ref={ref}
+        ref={ref as any}
         className={cn(
           paddingVariants[padding],
           backgroundVariants[background],
