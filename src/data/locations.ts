@@ -131,7 +131,8 @@ export const getStoresByCity = (city: string): Store[] => {
 
 // Helper function to get unique cities
 export const getCities = (): string[] => {
-  return [...new Set(stores.map(store => store.city))]
+  const cities = stores.map(store => store.city)
+  return cities.filter((city, index) => cities.indexOf(city) === index)
 }
 
 // Helper function to get store by ID
