@@ -86,4 +86,4 @@ export const META_DEFAULTS = {
     'the misal story',
   ],
   ogImage: '/images/og-image.jpg',
-} as const
+}
