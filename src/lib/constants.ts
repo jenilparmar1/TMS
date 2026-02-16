@@ -12,27 +12,27 @@ export const SITE_CONFIG = {
   email: 'hello@themisalstory.com',
   phone: '+91 98765 43210',
   foundedYear: 2024,
-} as const
+}  
 
 export const BRAND_COLORS = {
   primary: '#E4002B', // Pantone 2347C
   accent: '#0072CE',  // Pantone 285C
   white: '#FFFFFF',
-} as const
+}  
 
 export const SOCIAL_LINKS = {
   instagram: 'https://instagram.com/themisalstory',
   facebook: 'https://facebook.com/themisalstory',
   twitter: 'https://twitter.com/themisalstory',
   youtube: 'https://youtube.com/@themisalstory',
-} as const
+}  
 
 export const ANIMATION_DURATION = {
   fast: 0.2,
   normal: 0.3,
   slow: 0.5,
   verySlow: 0.8,
-} as const
+}  
 
 export const BREAKPOINTS = {
   sm: 640,
@@ -40,7 +40,7 @@ export const BREAKPOINTS = {
   lg: 1024,
   xl: 1280,
   '2xl': 1536,
-} as const
+}  
 
 export const SPICE_LEVELS = {
   1: { label: 'Mild', description: 'Just a hint of spice' },
@@ -48,7 +48,7 @@ export const SPICE_LEVELS = {
   3: { label: 'Spicy', description: 'For spice lovers' },
   4: { label: 'Hot', description: 'Bring the heat!' },
   5: { label: 'Extreme', description: 'Kolhapur-level fire!' },
-} as const
+} 
 
 export const STORE_FEATURES = {
   'dine-in': { label: 'Dine In', icon: 'utensils' },
@@ -57,7 +57,7 @@ export const STORE_FEATURES = {
   'parking': { label: 'Parking', icon: 'car' },
   'wifi': { label: 'Free WiFi', icon: 'wifi' },
   'ac': { label: 'Air Conditioned', icon: 'snowflake' },
-} as const
+}
 
 export const CONTACT_SUBJECTS = [
   { value: 'general', label: 'General Inquiry' },
@@ -68,7 +68,7 @@ export const CONTACT_SUBJECTS = [
   { value: 'partnership', label: 'Partnership' },
   { value: 'careers', label: 'Careers' },
   { value: 'other', label: 'Other' },
-] as const
+] 
 
 export const META_DEFAULTS = {
   title: `${SITE_CONFIG.name} | ${SITE_CONFIG.taglineEnglish}`,
