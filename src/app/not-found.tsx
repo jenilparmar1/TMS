@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Home, ArrowLeft } from 'lucide-react'
 import { Container, Button } from '@/components/ui'
-import { Mascot } from '@/components/mascot'
 
 export default function NotFound() {
   return (
@@ -22,7 +21,7 @@ export default function NotFound() {
             transition={{ type: 'spring', delay: 0.2 }}
             className="flex justify-center mb-8"
           >
-            <Mascot expression="thinking" size="xl" animate />
+            <div className="w-48 h-48" aria-hidden />
           </motion.div>
 
           {/* 404 */}

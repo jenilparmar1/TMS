@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion'
 import { Heart, Star, Sparkles, Users } from 'lucide-react'
 import { Container, Section, Card } from '@/components/ui'
-import { Mascot } from '@/components/mascot'
 import { StorySection } from '@/components/sections'
 import { brandValues } from '@/data/ingredients'
 import { SITE_CONFIG } from '@/lib/constants'
@@ -27,7 +26,7 @@ export default function AboutPage() {
               animate={{ opacity: 1, y: 0 }}
               className="flex justify-center mb-6"
             >
-              <Mascot expression="happy" size="lg" animate />
+              <div className="w-32 h-32" aria-hidden />
             </motion.div>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -133,7 +132,7 @@ export default function AboutPage() {
             viewport={{ once: true }}
             className="text-center"
           >
-            <Mascot expression="waving" size="lg" className="mx-auto mb-6" />
+            <div className="w-32 h-32 mx-auto mb-6" aria-hidden />
             <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-6">
               Made with <span className="text-primary-500">❤️</span> in Maharashtra
             </h2>

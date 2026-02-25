@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { Container, Section, Card, Button, SpiceIndicator, PopularTag, NewTag, VegTag } from '@/components/ui'
-import { Mascot } from '@/components/mascot'
 import { getPopularItems } from '@/data/menu'
 import { formatPrice } from '@/lib/utils'
 
@@ -39,7 +38,7 @@ export function FeaturedMenu() {
             viewport={{ once: true }}
             className="flex items-center gap-4"
           >
-            <Mascot expression="eating" size="sm" animate={false} />
+            <div className="w-16 h-16" aria-hidden />
             <Link href="/menu">
               <Button variant="outline" rightIcon={<ArrowRight className="w-4 h-4" />}>
                 View Full Menu

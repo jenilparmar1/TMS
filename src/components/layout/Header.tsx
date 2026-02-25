@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, MapPin, Phone } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Container } from '@/components/ui'
-import { MascotIcon } from '@/components/mascot'
+import Image from 'next/image'
 import { mainNavItems } from '@/data/navigation'
 import { SITE_CONFIG } from '@/lib/constants'
 
@@ -81,17 +81,39 @@ export function Header() {
         <Container>
           <nav className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 group">
-              <MascotIcon className="w-10 h-10 md:w-12 md:h-12 transition-transform group-hover:scale-110" />
-              <div className="flex flex-col">
-                <span className="text-xl md:text-2xl font-bold text-primary-500 leading-none">
-                  TMS
-                </span>
-                <span className="text-[10px] md:text-xs text-neutral-500 leading-none">
-                  The Misal Story
-                </span>
-              </div>
-            </Link>
+            <div className="flex items-center gap-3 md:gap-4">
+              <Link href="/" className="group flex items-center cursor-pointer">
+                <motion.div
+                  whileHover={{ scale: 1.035, rotateY: -10}}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: 'spring', stiffness: 280, damping: 20, mass: 0.8 }}
+                  style={{ transformStyle: 'preserve-3d' }}
+                  className="relative"
+                >
+                  <div className="absolute inset-0 rounded-full bg-primary-500/18 blur-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  <div className="absolute inset-0 rounded-full shadow-[0_10px_25px_rgba(0,0,0,0.18)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  <Image
+                    src="/TMS-2.jpg"
+                    alt="TMS Symbol"
+                    width={140}
+                    height={140}
+                    priority
+                    className="relative h-10 md:h-14 w-auto object-contain"
+                  />
+                </motion.div>
+              </Link>
+
+              <Image
+                src="/TMS-full.png"
+                alt="The Misal Story"
+                width={300}
+                height={96}
+                priority
+                className="h-9 md:h-12 w-auto object-contain"
+              />
+            </div>
+
+
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
@@ -164,17 +186,25 @@ export function Header() {
             >
               <div className="flex flex-col h-full">
                 {/* Menu Header */}
-                <div className="flex items-center justify-between p-4 border-b">
-                  <Link href="/" className="flex items-center gap-2">
-                    <MascotIcon className="w-8 h-8" />
-                    <span className="font-bold text-primary-500">TMS</span>
-                  </Link>
+                <div className="relative px-5 pt-5 pb-4 border-b border-neutral-200">
                   <button
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="p-2 text-neutral-500 hover:text-neutral-700"
+                    className="absolute top-4 right-4 p-2 text-neutral-500 hover:text-neutral-700"
+                    aria-label="Close menu"
                   >
                     <X className="w-6 h-6" />
                   </button>
+
+                  <Link href="/" className="block w-full pt-2">
+                    <Image
+                      src="/TMS-full.png"
+                      alt="The Misal Story Logo"
+                      width={420}
+                      height={120}
+                      priority
+                      className="mx-auto h-10 sm:h-11 w-auto max-w-[220px] sm:max-w-[250px] object-contain"
+                    />
+                  </Link>
                 </div>
 
                 {/* Menu Items */}

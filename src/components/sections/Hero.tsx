@@ -1,27 +1,85 @@
 'use client'
 
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowRight, MapPin, Sparkles } from 'lucide-react'
 import { Container, Button } from '@/components/ui'
-import { Mascot } from '@/components/mascot'
 import { SITE_CONFIG } from '@/lib/constants'
+import { FloatingMascotElements } from '@/components/hero/FloatingMascotElements'
 
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null)
+  const mobileIndicatorTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const [isDesktopViewport, setIsDesktopViewport] = useState(false)
+  const [showMobileScrollIndicator, setShowMobileScrollIndicator] = useState(false)
+  const [hasShownMobileScrollIndicator, setHasShownMobileScrollIndicator] = useState(false)
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 1024px)')
+
+    const updateViewport = () => {
+      setIsDesktopViewport(mediaQuery.matches)
+    }
+
+    updateViewport()
+    mediaQuery.addEventListener('change', updateViewport)
+
+    return () => {
+      mediaQuery.removeEventListener('change', updateViewport)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (isDesktopViewport || hasShownMobileScrollIndicator || window.innerWidth >= 1024) return
+
+    const handleScroll = () => {
+      if (window.innerWidth >= 1024 || window.scrollY < 24) return
+
+      setShowMobileScrollIndicator(true)
+      setHasShownMobileScrollIndicator(true)
+      window.removeEventListener('scroll', handleScroll)
+
+      mobileIndicatorTimeoutRef.current = setTimeout(() => {
+        setShowMobileScrollIndicator(false)
+      }, 2000)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [isDesktopViewport, hasShownMobileScrollIndicator])
+
+  useEffect(() => {
+    return () => {
+      if (mobileIndicatorTimeoutRef.current) {
+        clearTimeout(mobileIndicatorTimeoutRef.current)
+      }
+    }
+  }, [])
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start start', 'end start'],
   })
 
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
+  const y = useTransform(
+    scrollYProgress,
+    [0, 1],
+    isDesktopViewport ? ['0%', '30%'] : ['0%', '0%'],
+  )
+  const opacity = useTransform(
+    scrollYProgress,
+    [0, 0.5],
+    isDesktopViewport ? [1, 0] : [1, 1],
+  )
 
   return (
     <section
       ref={ref}
-      className="relative min-h-[90vh] md:min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-white via-primary-50/30 to-accent-50/20"
+      className="relative min-h-[90vh] md:min-h-screen flex items-center pt-4 sm:pt-6 lg:pt-0 pb-14 sm:pb-16 lg:pb-0 overflow-visible lg:overflow-hidden bg-gradient-to-br from-white via-primary-50/30 to-accent-50/20"
     >
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-pattern-dots bg-dots opacity-5" />
@@ -123,7 +181,7 @@ export function Hero() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="order-1 lg:order-2 flex justify-center"
+              className="order-1 lg:order-2 flex items-center justify-center pt-2 sm:pt-3 lg:pt-0"
             >
               <div className="relative">
                 {/* Decorative circles */}
@@ -140,8 +198,10 @@ export function Hero() {
 
                 {/* Mascot */}
                 <div className="relative z-10 p-8">
-                  <Mascot expression="excited" size="xl" animate />
+                  <div className="w-48 h-48" aria-hidden />
                 </div>
+
+                <FloatingMascotElements />
 
                 {/* Floating food items */}
                 <motion.div
@@ -178,12 +238,12 @@ export function Hero() {
         </motion.div>
       </Container>
 
-      {/* Scroll Indicator */}
+      {/* Scroll Indicator (Desktop) */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:block"
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}
@@ -200,6 +260,34 @@ export function Hero() {
           </div>
         </motion.div>
       </motion.div>
+
+      {/* Scroll Indicator (Mobile: reveal once on slight scroll, then auto-hide) */}
+      <AnimatePresence>
+        {!isDesktopViewport && showMobileScrollIndicator && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.35, ease: 'easeInOut' }}
+            className="absolute bottom-6 left-1/2 -translate-x-1/2 lg:hidden pointer-events-none"
+          >
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+              className="flex flex-col items-center gap-2 text-neutral-400"
+            >
+              <span className="text-xs uppercase tracking-wider">Scroll to explore</span>
+              <div className="w-6 h-10 border-2 border-neutral-300 rounded-full flex justify-center pt-2">
+                <motion.div
+                  animate={{ y: [0, 12, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                  className="w-1.5 h-1.5 bg-primary-500 rounded-full"
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   )
 }

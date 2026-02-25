@@ -144,24 +144,7 @@ export interface StorySection {
   year?: string
 }
 
-// ============================================
-// Mascot Types
-// ============================================
-
-export type MascotExpression = 
-  | 'happy'
-  | 'waving'
-  | 'thinking'
-  | 'excited'
-  | 'sleeping'
-  | 'eating'
-
-export interface MascotProps {
-  expression?: MascotExpression
-  size?: 'sm' | 'md' | 'lg' | 'xl'
-  animate?: boolean
-  className?: string
-}
+// Mascot has been removed from the codebase; related types deleted.
 
 // ============================================
 // Navigation Types

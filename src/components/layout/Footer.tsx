@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Instagram, Facebook, Twitter, Youtube, Mail, Phone, MapPin, Heart } from 'lucide-react'
 import { Container, Grid } from '@/components/ui'
-import { Mascot } from '@/components/mascot'
 import { footerNavItems, socialLinks } from '@/data/navigation'
 import { SITE_CONFIG } from '@/lib/constants'
 
@@ -25,7 +24,7 @@ export function Footer() {
             {/* Brand Column */}
             <div className="lg:col-span-2">
               <div className="flex items-start gap-4 mb-6">
-                <Mascot expression="waving" size="md" animate />
+                <div className="w-24 h-24" aria-hidden />
                 <div>
                   <h3 className="text-2xl font-bold text-primary-400">
                     The Misal Story

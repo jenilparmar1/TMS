@@ -1,7 +1,6 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Mascot } from '@/components/mascot'
 
 export default function Loading() {
   return (
@@ -11,7 +10,7 @@ export default function Loading() {
         animate={{ opacity: 1 }}
         className="text-center"
       >
-        <Mascot expression="excited" size="lg" animate />
+        <div className="w-32 h-32 mx-auto" aria-hidden />
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}

@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { MapPin, Phone, Mail, Clock, Navigation, Car, Wifi, Utensils, Package, Truck, Snowflake } from 'lucide-react'
 import { Container, Section, Card, Button } from '@/components/ui'
-import { Mascot } from '@/components/mascot'
 import { stores, getCities } from '@/data/locations'
 import type { Store, StoreFeature } from '@/types'
 import { cn } from '@/lib/utils'
@@ -46,7 +45,7 @@ export default function LocationsPage() {
               animate={{ opacity: 1, y: 0 }}
               className="flex justify-center mb-6"
             >
-              <Mascot expression="waving" size="lg" animate />
+              <div className="w-32 h-32" aria-hidden />
             </motion.div>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}

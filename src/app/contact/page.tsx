@@ -6,7 +6,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { motion } from 'framer-motion'
 import { Send, Phone, Mail, MapPin, CheckCircle, AlertCircle } from 'lucide-react'
 import { Container, Section, Card, Button, Input, Textarea, Select } from '@/components/ui'
-import { Mascot } from '@/components/mascot'
 import { contactFormSchema, type ContactFormValues, sanitizeFormData } from '@/lib/validations'
 import { submitContactForm } from '@/services/api'
 import { SITE_CONFIG, CONTACT_SUBJECTS } from '@/lib/constants'
@@ -69,7 +68,7 @@ export default function ContactPage() {
               animate={{ opacity: 1, y: 0 }}
               className="flex justify-center mb-6"
             >
-              <Mascot expression="happy" size="lg" animate />
+              <div className="w-32 h-32" aria-hidden />
             </motion.div>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}

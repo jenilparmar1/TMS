@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Container, Section, Card, SpiceIndicator, PopularTag, NewTag, VegTag, Button } from '@/components/ui'
-import { Mascot } from '@/components/mascot'
 import { menuItems, menuCategories, getMenuByCategory } from '@/data/menu'
 import { formatPrice, cn } from '@/lib/utils'
 import type { MenuItem, MenuCategory } from '@/types'
@@ -37,7 +36,7 @@ export default function MenuPage() {
               animate={{ opacity: 1, y: 0 }}
               className="flex justify-center mb-6"
             >
-              <Mascot expression="eating" size="lg" animate />
+              <div className="w-32 h-32" aria-hidden />
             </motion.div>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -107,7 +106,7 @@ export default function MenuPage() {
 
           {filteredItems.length === 0 && (
             <div className="text-center py-12">
-              <Mascot expression="thinking" size="md" />
+              <div className="w-24 h-24 mx-auto" aria-hidden />
               <p className="mt-4 text-neutral-500">No items found in this category.</p>
             </div>
           )}
