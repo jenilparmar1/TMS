@@ -7,6 +7,7 @@ import { Container, Section, Card, Button } from '@/components/ui'
 import { stores, getCities } from '@/data/locations'
 import type { Store, StoreFeature } from '@/types'
 import { cn } from '@/lib/utils'
+import FloatingMascotElements from '@/components/hero/FloatingMascotElements'
 
 const featureIcons: Record<StoreFeature, React.ComponentType<{ className?: string }>> = {
   'dine-in': Utensils,
@@ -45,7 +46,12 @@ export default function LocationsPage() {
               animate={{ opacity: 1, y: 0 }}
               className="flex justify-center mb-6"
             >
-              <div className="w-32 h-32" aria-hidden />
+             <div className="relative w-56 h-56 md:w-64 md:h-64" aria-hidden>
+                <FloatingMascotElements
+                  variant="hero"
+                  className="overflow-visible rounded-none"
+                />
+              </div>
             </motion.div>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}

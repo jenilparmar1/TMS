@@ -7,6 +7,7 @@ import { Container, Section, Card, SpiceIndicator, PopularTag, NewTag, VegTag, B
 import { menuItems, menuCategories, getMenuByCategory } from '@/data/menu'
 import { formatPrice, cn } from '@/lib/utils'
 import type { MenuItem, MenuCategory } from '@/types'
+import FloatingMascotElements from '@/components/hero/FloatingMascotElements'
 
 export default function MenuPage() {
   const searchParams = useSearchParams()
@@ -36,7 +37,12 @@ export default function MenuPage() {
               animate={{ opacity: 1, y: 0 }}
               className="flex justify-center mb-6"
             >
-              <div className="w-32 h-32" aria-hidden />
+              <div className="relative w-56 h-56 md:w-64 md:h-64" aria-hidden>
+                <FloatingMascotElements
+                  variant="hero"
+                  className="overflow-visible rounded-none"
+                />
+              </div>
             </motion.div>
             <motion.h1
               initial={{ opacity: 0, y: 20 }}

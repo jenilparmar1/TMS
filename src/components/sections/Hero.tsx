@@ -7,6 +7,7 @@ import { ArrowRight, MapPin, Sparkles } from 'lucide-react'
 import { Container, Button } from '@/components/ui'
 import { SITE_CONFIG } from '@/lib/constants'
 import { FloatingMascotElements } from '@/components/hero/FloatingMascotElements'
+import Image from 'next/image'
 
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null)
@@ -201,7 +202,7 @@ export function Hero() {
                   <div className="w-48 h-48" aria-hidden />
                 </div>
 
-                <FloatingMascotElements />
+                <FloatingMascotElements className="-translate-x-2 sm:-translate-x-1 lg:translate-x-0" />
 
                 {/* Floating food items */}
                 <motion.div
@@ -209,28 +210,52 @@ export function Hero() {
                   animate={{ y: [0, -10, 0], rotate: [0, 10, 0] }}
                   transition={{ duration: 3, repeat: Infinity }}
                 >
-                  🌶️
+                  <Image
+                    src="/chilli.png"
+                    alt="chilli pepper"
+                    width={64}
+                    height={64}
+                    className="w-16 h-16"
+                  />
                 </motion.div>
                 <motion.div
-                  className="absolute top-1/4 -left-8 text-3xl"
+                  className="absolute top-8 -left-8 text-3xl"
                   animate={{ y: [0, 10, 0], rotate: [0, -10, 0] }}
                   transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
                 >
-                  🍞
+                  <Image
+                    src="/pav.png"
+                    alt="pav bread"
+                    width={64}
+                    height={64}
+                    className="w-16 h-16"
+                  />
                 </motion.div>
                 <motion.div
                   className="absolute bottom-8 -right-4 text-3xl"
                   animate={{ y: [0, -8, 0], rotate: [0, 15, 0] }}
                   transition={{ duration: 3.5, repeat: Infinity, delay: 1 }}
                 >
-                  🧅
+                  <Image
+                    src="/onion.png"
+                    alt="onion"
+                    width={64}
+                    height={64}
+                    className="w-16 h-16"
+                  />
                 </motion.div>
                 <motion.div
                   className="absolute bottom-4 left-0 text-2xl"
                   animate={{ y: [0, 8, 0], rotate: [0, -8, 0] }}
                   transition={{ duration: 4, repeat: Infinity, delay: 1.5 }}
                 >
-                  🍋
+                  <Image
+                    src="/lemon.png"
+                    alt="lemon"
+                    width={55}
+                    height={55}
+                    className="w-13 h-13"
+                  />
                 </motion.div>
               </div>
             </motion.div>
