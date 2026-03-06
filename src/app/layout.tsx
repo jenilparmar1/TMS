@@ -1,21 +1,7 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Poppins } from 'next/font/google'
 import { Header, Footer } from '@/components/layout'
 import { SITE_CONFIG, META_DEFAULTS } from '@/lib/constants'
 import './globals.css'
-
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter',
-})
-
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['600', '700', '800', '900'],
-  display: 'swap',
-  variable: '--font-poppins',
-})
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.url),
@@ -88,7 +74,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
+    <html lang="en">
       <body className="min-h-screen flex flex-col">
         <Header />
         <main className="flex-1">{children}</main>

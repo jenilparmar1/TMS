@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 /* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800;900&display=swap');
+@import url('https://fonts.cdnfonts.com/css/glacial-indifference-2');
 
 @layer base {
   :root {
-    --font-inter: 'Inter', system-ui, sans-serif;
-    --font-poppins: 'Poppins', system-ui, sans-serif;
+    --font-heading: 'Georgia', 'Times New Roman', serif;
+    --font-body: 'Glacial Indifference', 'Segoe UI', system-ui, sans-serif;
   }
 
   html {
@@ -18,13 +18,42 @@
   }
 
   body {
-    @apply font-sans text-neutral-900 bg-white;
-    font-family: var(--font-inter);
+    @apply text-neutral-900 bg-white;
+    font-family: var(--font-body);
+    font-weight: 400;
+    letter-spacing: 0.005em;
   }
 
-  /* Headings use display font */
+  /* Headings stay on Georgia to keep visual contrast with body text. */
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-poppins);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+
+  p,
+  li,
+  span,
+  label,
+  input,
+  textarea,
+  select {
+    font-family: var(--font-body);
+    font-weight: 400;
+  }
+
+  b,
+  strong {
+    font-weight: 700;
+  }
+
+  /* Small/sub text uses Glacial with readable default weight. */
+  small,
+  .text-xs,
+  .text-sm {
+    font-family: var(--font-body);
+    font-weight: 400;
   }
 
   /* Remove default button styles */

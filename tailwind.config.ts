@@ -53,8 +53,9 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
-        display: ['var(--font-poppins)', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-body)', 'Segoe UI', 'system-ui', 'sans-serif'],
+        display: ['var(--font-heading)', 'Georgia', 'Times New Roman', 'serif'],
+        small: ['var(--font-body)', 'Segoe UI', 'system-ui', 'sans-serif'],
       },
       fontSize: {
         'display-xl': ['4.5rem', { lineHeight: '1', letterSpacing: '-0.02em' }],
