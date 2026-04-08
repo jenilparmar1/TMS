@@ -73,6 +73,38 @@
 }
 
 @layer components {
+  .hero-with-background {
+    position: relative;
+    isolation: isolate;
+    background-color: #f6f0ea;
+    background-image: url('/misal-plate-hero.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+  .hero-with-background::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    /* Keep the left text region readable while adding depth behind the mascot. */
+    background: linear-gradient(
+      96deg,
+      rgba(255, 255, 255, 0.64) 0%,
+      rgba(255, 255, 255, 0.48) 46%,
+      rgba(0, 0, 0, 0.14) 100%
+    );
+  }
+
+  @media (max-width: 1023px) {
+    .hero-with-background {
+      background-attachment: scroll;
+    }
+  }
+
   /* Section title styles */
   .section-title {
     @apply text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight;

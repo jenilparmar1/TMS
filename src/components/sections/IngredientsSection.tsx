@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Container, Section } from '@/components/ui'
 import { ingredients } from '@/data/ingredients'
@@ -61,7 +62,17 @@ export function IngredientsSection() {
                   className="w-12 h-12 md:w-16 md:h-16 mx-auto rounded-full mb-3 flex items-center justify-center text-2xl md:text-3xl"
                   style={{ backgroundColor: `${ingredient.color}20` }}
                 >
-                  {getIngredientEmoji(ingredient.id)}
+                  {getIngredientVisual(ingredient.id) ? (
+                    <Image
+                      src={getIngredientVisual(ingredient.id)!}
+                      alt={ingredient.name}
+                      width={64}
+                      height={64}
+                      className="h-full w-full rounded-full object-cover"
+                    />
+                  ) : (
+                    getIngredientEmoji(ingredient.id)
+                  )}
                 </div>
                 <h4 className="font-semibold text-neutral-900 text-sm md:text-base">
                   {ingredient.name}
@@ -88,7 +99,15 @@ export function IngredientsSection() {
                   className="w-16 h-16 md:w-20 md:h-20 rounded-2xl flex items-center justify-center text-3xl md:text-4xl flex-shrink-0"
                   style={{ backgroundColor: `${activeIngredient.color}20` }}
                 >
-                  {getIngredientEmoji(activeIngredient.id)}
+                  {getIngredientVisual(activeIngredient.id) && (
+                    <Image
+                      src={getIngredientVisual(activeIngredient.id)!}
+                      alt={activeIngredient.name}
+                      width={80}
+                      height={80}
+                      className="h-full w-full rounded-2xl object-cover"
+                    />
+                  )}
                 </div>
                 <div>
                   <h3 className="text-2xl md:text-3xl font-bold text-neutral-900">
@@ -130,16 +149,17 @@ export function IngredientsSection() {
   )
 }
 
-function getIngredientEmoji(id: string): string {
-  const emojiMap: Record<string, string> = {
-    sprouts: '🌱',
-    tarri: '🍛',
-    farsan: '🥜',
-    pav: '🍞',
-    onion: '🧅',
-    lemon: '🍋',
+function getIngredientVisual(id: string): string | null {
+  const imageMap: Record<string, string> = {
+    sprouts: '/Sprouts.png',
+    tarri: '/Tarri.png',
+    farsan: '/Farsan.jpg',
+    pav: '/Pav.png',
+    onion: '/Onion.png',
+    lemon: '/lemon.png',
   }
-  return emojiMap[id] || '🥣'
+
+  return imageMap[id] || null
 }
 
 export default IngredientsSection

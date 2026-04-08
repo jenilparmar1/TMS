@@ -80,7 +80,7 @@ export function Hero() {
   return (
     <section
       ref={ref}
-      className="relative min-h-[90vh] md:min-h-screen flex items-center pt-4 sm:pt-6 lg:pt-0 pb-14 sm:pb-16 lg:pb-0 overflow-visible lg:overflow-hidden bg-gradient-to-br from-white via-primary-50/30 to-accent-50/20"
+      className="hero-with-background relative min-h-[90vh] md:min-h-screen flex items-center pt-4 sm:pt-6 lg:pt-0 pb-14 sm:pb-16 lg:pb-0 overflow-visible lg:overflow-hidden"
     >
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-pattern-dots bg-dots opacity-5" />
