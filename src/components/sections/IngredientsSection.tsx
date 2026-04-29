@@ -71,7 +71,7 @@ export function IngredientsSection() {
                       className="h-full w-full rounded-full object-cover"
                     />
                   ) : (
-                    getIngredientEmoji(ingredient.id)
+                    <span aria-hidden="true">{getIngredientEmoji(ingredient.id)}</span>
                   )}
                 </div>
                 <h4 className="font-semibold text-neutral-900 text-sm md:text-base">
@@ -99,7 +99,7 @@ export function IngredientsSection() {
                   className="w-16 h-16 md:w-20 md:h-20 rounded-2xl flex items-center justify-center text-3xl md:text-4xl flex-shrink-0"
                   style={{ backgroundColor: `${activeIngredient.color}20` }}
                 >
-                  {getIngredientVisual(activeIngredient.id) && (
+                  {getIngredientVisual(activeIngredient.id) ? (
                     <Image
                       src={getIngredientVisual(activeIngredient.id)!}
                       alt={activeIngredient.name}
@@ -107,6 +107,8 @@ export function IngredientsSection() {
                       height={80}
                       className="h-full w-full rounded-2xl object-cover"
                     />
+                  ) : (
+                    <span aria-hidden="true">{getIngredientEmoji(activeIngredient.id)}</span>
                   )}
                 </div>
                 <div>
@@ -160,6 +162,19 @@ function getIngredientVisual(id: string): string | null {
   }
 
   return imageMap[id] || null
+}
+
+function getIngredientEmoji(id: string): string {
+  const emojiMap: Record<string, string> = {
+    sprouts: '🌱',
+    tarri: '🌶️',
+    farsan: '🥨',
+    pav: '🍞',
+    onion: '🧅',
+    lemon: '🍋',
+  }
+
+  return emojiMap[id] || '🍲'
 }
 
 export default IngredientsSection
