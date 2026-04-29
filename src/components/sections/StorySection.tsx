@@ -1,9 +1,17 @@
-'use client'
+﻿'use client'
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Container, Section } from '@/components/ui'
 import { misalStory } from '@/data/ingredients'
+
+const misalImageMap = [
+  { titleImg: 'mumbai-misal-title.png', posterImg: 'mumbai-misal-poster.png' },
+  { titleImg: 'kolhapuri-misal-title.png', posterImg: 'kolhapuri-misal-poster.png' },
+  { titleImg: 'nagpuri-misal-title.png', posterImg: 'nagpuri-misal-poster.png' },
+  { titleImg: 'puneri-misal-title.png', posterImg: 'puneri-misal-poster.png' },
+  { titleImg: 'nagpuri-tari-poha-title.png', posterImg: 'nagpuri-tari-poha-poster.png' },
+]
 
 export function StorySection() {
   return (
@@ -30,17 +38,15 @@ export function StorySection() {
 
         {/* Timeline */}
         <div className="relative">
-          {/* Center Line */}
           <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary-200 via-primary-500 to-accent-500 md:-translate-x-1/2" />
 
-          {/* Timeline Items */}
           <div className="space-y-12 md:space-y-24">
             {misalStory.map((story, index) => (
               <TimelineItem
                 key={story.id}
                 story={story}
-                index={index}
                 isLeft={index % 2 === 0}
+                imageMap={misalImageMap[index] || misalImageMap[0]}
               />
             ))}
           </div>
@@ -57,26 +63,36 @@ interface TimelineItemProps {
     content: string
     year?: string
   }
-  index: number
   isLeft: boolean
+  imageMap: { titleImg: string; posterImg: string }
 }
 
-function TimelineItem({ story, index, isLeft }: TimelineItemProps) {
+function TimelineItem({ story, isLeft, imageMap }: TimelineItemProps) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
+
+  const titleImageUrl = `/assets/story/${imageMap.titleImg}`
+  const posterImageUrl = `/assets/story/${imageMap.posterImg}`
+  const fallbackImage = '/misal-plate-hero.png'
+
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    const img = e.currentTarget
+    if (img.src !== fallbackImage) {
+      img.src = fallbackImage
+    }
+  }
 
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
-      animate={isInView ? { opacity: 1, x: 0 } : {}}
-      transition={{ duration: 0.6, delay: 0.2 }}
-      className={`relative flex items-center ${
+      initial={{ opacity: 0, y: 18 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.9, ease: 'easeOut' }}
+      className={`relative flex flex-col gap-6 pl-12 md:pl-0 md:items-center md:gap-8 ${
         isLeft ? 'md:flex-row' : 'md:flex-row-reverse'
       }`}
     >
-      {/* Timeline Dot */}
-      <div className="absolute left-4 md:left-1/2 w-4 h-4 md:-translate-x-1/2 z-10">
+      <div className="absolute left-4 top-1/2 -translate-y-1/2 md:static md:translate-y-0 md:justify-self-center w-4 h-4 z-10">
         <motion.div
           initial={{ scale: 0 }}
           animate={isInView ? { scale: 1 } : {}}
@@ -91,36 +107,39 @@ function TimelineItem({ story, index, isLeft }: TimelineItemProps) {
         />
       </div>
 
-      {/* Content */}
-      <div
-        className={`w-full md:w-1/2 pl-12 md:pl-0 ${
-          isLeft ? 'md:pr-16 md:text-right' : 'md:pl-16 md:text-left'
-        }`}
+      <motion.div
+        className={`w-full md:w-1/2 ${isLeft ? 'md:pr-10' : 'md:pl-10'}`}
+        initial={{ opacity: 0, y: 18 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.9, ease: 'easeOut' }}
       >
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="bg-white rounded-2xl p-6 md:p-8 shadow-card hover:shadow-card-hover transition-shadow"
-        >
-          {/* Year Badge */}
-          {story.year && (
-            <span
-              className={`inline-block px-3 py-1 bg-gradient-brand text-white text-sm font-bold rounded-full mb-4`}
-            >
-              {story.year}
-            </span>
-          )}
+        <div className="overflow-hidden rounded-2xl bg-white p-2 shadow-card">
+          <img
+            src={titleImageUrl}
+            alt={`${story.title} title`}
+            loading="lazy"
+            onError={handleImageError}
+            className="block h-[160px] w-full rounded-xl object-contain object-center md:h-[210px]"
+          />
+        </div>
+      </motion.div>
 
-          <h3 className="text-xl md:text-2xl font-bold text-neutral-900 mb-3">
-            {story.title}
-          </h3>
-          <p className="text-neutral-600 leading-relaxed">{story.content}</p>
-        </motion.div>
-      </div>
-
-      {/* Spacer for alternating layout */}
-      <div className="hidden md:block w-1/2" />
+      <motion.div
+        className={`w-full md:w-1/2 ${isLeft ? 'md:pl-10' : 'md:pr-10'}`}
+        initial={{ opacity: 0, y: 18 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.9, ease: 'easeOut', delay: 0.05 }}
+      >
+        <div className="overflow-hidden rounded-2xl shadow-card">
+          <img
+            src={posterImageUrl}
+            alt={`${story.title} poster`}
+            loading="lazy"
+            onError={handleImageError}
+            className="block h-[220px] w-full object-cover md:h-[290px]"
+          />
+        </div>
+      </motion.div>
     </motion.div>
   )
 }
